@@ -1,0 +1,142 @@
+\documentclass{article} % For LaTeX2e
+% \usepackage{nips13submit_e,times}
+\usepackage{xeCJK}
+\setCJKmainfont{SimSun}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{textcomp}  % \textcelsius
+% \graphicspath{{./fig/}}
+% \usepackage{tikz}
+
+\title{Homework 3}
+\author{Zhong Yun 2016K8009915009}
+\date{Oct 8，2018}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proof}{Proof}
+
+\begin{document}
+
+
+\maketitle
+%
+%\begin{abstract}
+%empty
+%\end{abstract}
+
+
+% \input{problem-and-notation.tex}
+%\input{aaa}
+
+\section{Answer Sheet}
+\begin{theorem}AdaBoost Algorithm
+
+$$\frac{1}{N}\sum_{i=1}^NI(f(x_i)\neq y_i)\leq exp(-2\sum_{k=1}^K\gamma_k^2)$$
+
+where $\gamma_k=\frac{1}{2}-\epsilon^{(k)}$
+
+$$ I(f(x_i)\neq y_i)=\left\{
+\begin{aligned}
+0,while f(x_i)=y_i \\
+1,while f(x_i)\neq y_i
+\end{aligned}
+\right.
+$$
+\end{theorem}
+
+\begin{lemma}
+$$\prod_{k=1}^K\sqrt{1-4\gamma_k^2}\leq e^{-2\sum_{k=1}^K\gamma_k^2}$$
+
+where $\gamma_k\geq 0$
+\end{lemma}
+\begin{proof}
+\begin{itemize}
+\item[1.] \emph{We need to clarify some definitions:}
+$$\alpha^{(k)}=\frac{1}{2}log(\frac{1-\epsilon^{(k)}}{\epsilon^{(k)}})$$
+$$d_{i}^{(k+1)}=\frac{d_{i}^k}{Z^{(k)}}exp(-\alpha^{(k)}y_if(x_i))$$
+$$\epsilon^{(k)}=\sum_{i=1}^Nd_i^{k-1}[y_i\neq f^{(k)}(x_i)]$$
+$$Z^{(k)}=\sum_{i=1}^Nd_{i}^kexp(-\alpha^{(k)}y_if(x_i))$$
+$$F(x)=\sum_{k=1}^K\alpha^{(k)}f^{(k)}(x)$$
+$$f(x)=sgn[F(x)]=sgn[\sum_{k}\alpha^{(k)}f^{(k)}(x)]$$
+
+
+\item[2.] \emph{According to Lemma, we only need to prove the following inequality:}
+$$\frac{1}{N}\sum_{i=1}^NI(f(x_i)\neq y_i)\leq \prod_{k=1}^K\sqrt{1-4\gamma_k^2}$$
+
+\item[3.] \emph{First, we prove this inequality}
+$$\sum_{i=1}^NI(f(x_i)\neq y_i)\leq \sum_{i=1}^Nexp(-y_iF(x_i))$$
+
+\emph{Proof:}
+
+\emph{If} $f(x_i)=y_i$, \emph{then} $I(f(x_i)\neq y_i)=0$ \emph{and} $y_iF(x_i)\geq 0$, \emph{so} $exp(-y_iF(x_i))\geq 0$
+
+\emph{We have} $I(f(x_i)\neq y_i)\leq exp(-y_iF(x_i))$
+
+\emph{If} $f(x_i)\neq y_i$, \emph{then} $I(f(x_i)\neq y_i)=1$ \emph{and} $y_iF(x_i)\leq 0$, \emph{so} $exp(-y_iF(x_i))\geq 1$
+
+\emph{Still, we have} $I(f(x_i)\neq y_i)\leq exp(-y_iF(x_i))$
+
+\item[4.] \emph{We prove that:}
+$$\frac{1}{N}\sum_{i=1}^Nexp(-y_iF(x_i))=\prod_{k=1}^KZ^{(k)}$$
+
+\emph{Proof:\\According to the definition in part1, we have that}
+$$\alpha^{(k)}=\frac{1}{2}log(\frac{1-\epsilon^{(k)}}{\epsilon^{(k)}})$$
+$$d_{i}^{(k+1)}=\frac{d_{i}^k}{Z^{(k)}}exp(-\alpha^{(k)}y_if(x_i))$$
+$$\epsilon^{(k)}=\sum_{i=1}^Nd_i^{k-1}[y_i\neq f^{(k)}(x_i)]$$
+$$Z^{(k)}=\sum_{i=1}^Nd_{i}^kexp(-\alpha^{(k)}y_if(x_i))$$
+
+$$
+\begin{aligned}
+\frac{1}{N}\sum_{i=1}^Nexp(-y_iF(x_i))&=\frac{1}{N}\sum_{i=1}^Nexp(-\sum_{k=1}^K\alpha^{(k)}y_if^{(k)}(x_i)\\
+&=\sum_{i=1}^N\frac{1}{N}\prod_{k=1}^Kexp(\alpha^{(k)}y_if^{(k)}(x_i))\\
+&=\sum_{i=1}^Nd_i^{(0)}\prod_{k=1}^Kexp(\alpha^{(k)}y_if^{(k)}(x_i))\\
+&=Z^{(1)}\sum_{i=1}^Nd_i^{(1)}\prod_{k=2}^Kexp(\alpha^{(k)}y_if^{(k)}(x_i))\\
+&=Z^{(1)}Z^{(2)}\sum_{i=1}^Nd_i^{(2)}\prod_{k=3}^Kexp(\alpha^{(k)}y_if^{(k)}(x_i))\\
+&=\cdots\\
+&=Z^{(1)}Z^{(2)}\cdots Z^{(K-1)}\sum_{i=1}^Nd_i^{(K)}exp(\alpha^{(K)}y_if^{(K)}(x_K))\\
+&=Z^{(1)}Z^{(2)}\cdots Z^{(K)}\\
+&=\prod_{k=1}^KZ^{(k)}
+\end{aligned}
+$$
+
+\item[5.] \emph{We prove the following equality:}
+$$Z^{(k)}=\sqrt{1-4\gamma_k^2}$$
+\emph{where} $\gamma_k=\frac{1}{2}-\epsilon^{(k)}$
+
+\emph{Proof:}
+$$
+\begin{aligned}
+Z^{(k)}&=\sum_{i=1}^Nd_{i}^kexp(-\alpha^{(k)}y_if^{(k)}(x_i))\\
+&=\sum_{f^{(k)}(x_i)=y_i}d_{i}^kexp(-\alpha^{(k)})+\sum_{f^{(k)}(x_i)\neq y_i}d_{i}^kexp(\alpha^{(k)})\\
+&=(1-\epsilon^{(k)})exp(-\alpha^{(k)})+(\epsilon^{(k)})exp(\alpha^{(k)})\\
+&=\sqrt{1-4\gamma_k^2}
+\end{aligned}
+$$
+\emph{where} $\gamma_k=\frac{1}{2}-\epsilon^{(k)}$
+
+\item[6.] \emph{Taking 1,\ 2,\ 3,\ 4,\ 5\ into acount,
+We can prove that:}
+$$\frac{1}{N}\sum_{i=1}^NI(f(x_i)\neq y_i)\leq exp(-2\sum_{k=1}^K\gamma_k^2)$$
+
+\end{itemize}
+
+\end{proof}
+
+
+
+
+
+\end{document}

@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{CJK}
+\usepackage{amssymb} % For LaTeX2e
+% \usepackage{nips13submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{textcomp}  % \textcelsius
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{setspace} %\linestretch{1.6}
+\renewcommand{\baselinestretch}{1.6}
+% \graphicspath{{./fig/}}
+% \usepackage{tikz}
+
+\title{Homework 8}
+\author{Zhong Yun 2016K8009915009}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=0.0cm,bottom=2.5cm}
+
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\begin{document}
+\begin{CJK*}{GBK}{song}
+\maketitle
+
+ \textbf{A propositional 2-CNF expression is a conjunction of clauses, each containing exactly 2 literals, e.g.,}
+    \[
+        \mathbf{(A \lor B) \land (\lnot A \lor C) \land (\lnot B \lor D) \land (\lnot C \lor G) \land (\lnot D \lor G).}
+    \]
+
+    $\mathbf{a.}$ \textbf{Prove using resolution that the above sentence entails $G$.}
+
+    $\textbf{Proof}$ \quad We prove $(A \lor B) \land (\lnot A \lor C) \land (\lnot B \lor D) \land (\lnot C \lor G) \land (\lnot D \lor G)$ entails $G$ by proving that $(A \lor B) \land (\lnot A \lor C) \land (\lnot B \lor D) \land (\lnot C \lor G) \land (\lnot D \lor G)\land \lnot G$ is unsatisfiable. \\\indent According to the soundness of resolution, we only need to prove that the resolution closure of the sentence above contains $\O$. \\\indent Process of resolution is as followings:
+    $$\frac{A\lor B, \lnot A \lor C}{B \lor C}, \frac{B \lor C, \lnot B\lor D}{C \lor D}, \frac{C \lor D,\lnot C \lor  G}{D \lor G},\frac{D\lor G, \lnot D  \lor G}{G}, \frac{G, \lnot G}{\O}$$
+    \indent Thus we have $(A \lor B) \land (\lnot A \lor C) \land (\lnot B \lor D) \land (\lnot C \lor G) \land (\lnot D \lor G)\vdash G$, then we have  $(A \lor B) \land (\lnot A \lor C) \land (\lnot B \lor D) \land (\lnot C \lor G) \land (\lnot D \lor G)\land \lnot G$ is unsatisfiable, finally we prove that  $(A \lor B) \land (\lnot A \lor C) \land (\lnot B \lor D) \land (\lnot C \lor G) \land (\lnot D \lor G)\models G$.\\
+
+    $\mathbf{b.}$ \textbf{Two clauses are semantically distinct if they are not logically equivalent. How many semantically distinct 2-CNF clauses can be constructed from n proposition symbols?}
+
+    $\textbf{Solution}$ \quad n proposition symbols contains 2n different literals which could construct $\begin{pmatrix} 2n \\  2 \end{pmatrix} = 2n^2-n$ different 2-CNF clauses. However, they contain n valid clauses like $A \lor \lnot A$ which should be eliminated, so $2n^2-n-n = 2n^2-2n$ semantically distinct 2-CNF clauses can be constructed from n proposition symbols.\\
+
+    $\mathbf{c.}$ \textbf{Using your answer to (b), prove that propositional resolution always terminates in time polynomial in n given a 2-CNF sentence containing no more than n distinct symbols.}
+
+    $\textbf{Proof}$ \quad 2-CNF clauses are \textbf{closed} under resolution, trivially. Given a 2-CNF sentence containing no more than n distinct symbols, according to \textbf{(b)}, the clauses that can be resolved by this sentence are no more than $2n^2-2n$. That is to say, resolution will terminates in $2n^2-2n-1(O(n))$ steps in the worst case. \\\indent Thus, propositional resolution always terminates in time polynomial in n given a 2-CNF sentence containing no more than n distinct symbols.\\
+
+    $\mathbf{d.}$ \textbf{Explain why your argument in (c) does not apply to 3-CNF.}
+
+    $\textbf{Proof}$ \quad Each 3-CNF clause has an additional literal which makes its resolution termination time in the worst different with 2-CNF clause's termination time. What's more, 3-CNF clauses are \textbf{closed} under resolution, $\frac{A\lor B \lor \lnot C, C\lor D \lor E}{A\lor B \lor D \lor E}$, for example. \\\indent Therefore, resolution in 3-CNF is quite different with 2-CNF's. Argument in \textbf{(c)} cannot be applied to 3-CNF.
+    
+\end{CJK*}
+\end{document}
+
+

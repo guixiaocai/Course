@@ -1,0 +1,50 @@
+\
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{textcomp}  % \textcelsius
+% \graphicspath{{./fig/}}
+% \usepackage{tikz}
+
+\title{Homework 1}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proof}{Proof}
+
+\begin{document}
+
+
+\maketitle
+%
+%\begin{abstract}
+%empty
+%\end{abstract}
+
+
+% \input{problem-and-notation.tex}
+\input{aaa}
+
+% \input{our-approach.tex}
+%
+% \section{Evaluation}
+% [outline]which model to compare? How to convince readers that the problem is difficult and our model is good.
+%
+% \section{Speed Up}
+% [outline]\\
+% 1. Basic Model: node by node\\
+% 2. Speed up model: layer by layer
+%
+% \input{related-work.tex}
+%
+% \subsubsection*{References}
+
+\end{document}

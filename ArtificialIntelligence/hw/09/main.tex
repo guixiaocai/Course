@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{} % For LaTeX2e
+% \usepackage{nips13submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{CJK}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{setspace} %\linestretch{1.6}
+\renewcommand{\baselinestretch}{1.6}
+\usepackage{textcomp}  % \textcelsius
+% \graphicspath{{./fig/}}
+% \usepackage{tikz}
+
+\title{Homework 9}
+\author{Zhong Yun 2016K8009915009}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=0.0cm,bottom=2.5cm}
+
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proof}{Proof}
+
+\begin{document}
+\begin{CJK*}{GBK}{song}
+
+\maketitle
+
+$\mathbf{8.15}$ \textbf{Explain what is wrong with the following proposed definition of the set membership predicate $\in$ :}
+$$\mathbf{\forall x,s \quad x \in \{x\mid  s\}}$$ $$\mathbf{\forall x,s \quad x \in s \Rightarrow \forall y\quad x\in \{y\mid s\}.}$$
+
+
+\textbf{Solution} 当x是给定集合的元素时，题中所给公式可以很好地定义几集合关系；但是该定义不完备的地方在于，它没有定义当x不是集合的元素的情况，也就是说，无法通过以上定义来证明x不在集合中。
+
+\indent 从公式角度来说，对于$\forall x,s \quad x \in s \Rightarrow \forall y\quad x\in \{y\mid s\}.$，当条件$\forall x,s \quad x \in s$ 为假时，仍可推出$\forall y\quad x\in \{y\mid s\}.$，即当$x\notin s$ 时，$x$ 可以属于任意集合，这与我们对$\in$的定义矛盾。
+
+
+$\mathbf{8.20}$ \textbf{Arithmetic assertions can be written in first-order-logic with the predicate symbol <, the function symbol + and $\times$, and the constant symbols 0 and 1. Additional predicates can also be defined with biconditionals.\\}
+\indent \textbf{a. Represent the property "x is an even number."\\}
+\indent \textbf{Solution} 用谓词EVEN来表示“x is an even number”，则$EVEN(x) = \exists y\quad (x = y + y).$
+
+\indent \textbf{b. Represent the property "x is prime."\\}
+\indent \textbf{Solution} 用谓词PRIME来表示“x is prime”，则$PRIME(x)=\lnot \exists y, z\quad ((x=y\times z)\land (x>1)\land (y>1) \land (z>1)). $
+
+\indent \textbf{c. Goldbach's conjecture is the conjecture(unproven as yet)that every number is equal to the sum of two primes. Represent this conjecture as a logical sentence.}
+
+\indent \textbf{Solution} 此处使用\textbf{(b)}中的谓词PRIME，则Goldbach's conjecture的表示为：$$\forall x \exists y, z\quad (x=y+z)\land PRIME(y)\land PRIME(z)$$
+
+
+
+
+% \section{Speed Up}
+% [outline]\\
+% 1. Basic Model: node by node\\
+% 2. Speed up model: layer by layer
+%
+% \input{related-work.tex}
+%
+% \subsubsection*{References}
+\end{CJK*}
+\end{document}

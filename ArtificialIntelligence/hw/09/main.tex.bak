@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{} % For LaTeX2e
+% \usepackage{nips13submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{CJK}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{setspace} %\linestretch{1.6}
+\renewcommand{\baselinestretch}{1.6}
+\usepackage{textcomp}  % \textcelsius
+% \graphicspath{{./fig/}}
+% \usepackage{tikz}
+
+\title{Homework 9}
+\author{Zhong Yun 2016K8009915009}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=0.0cm,bottom=2.5cm}
+
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proof}{Proof}
+
+\begin{document}
+\begin{CJK*}{GBK}{song}
+
+\maketitle
+
+$\mathbf{8.15}$ \textbf{Explain what is wrong with the following proposed definition of the set membership predicate $\in$ :}
+$$\mathbf{\forall x,s \quad x \in \{x\mid  s\}}$$ $$\mathbf{\forall x,s \quad x \in s \Rightarrow \forall y\quad x\in {y\mid s}.}$$
+
+\textbf{Solution} 
+
+
+$\mathbf{8.20}$ \textbf{Arithmetic assertions can be written in first-order-logic with the predicate symbol <, the function symbol + and $\times$, and the constant symbols 0 and 1. Additional predicates can also be defined with biconditionals.\\
+\indent a. Represent the property "x is an even member."\\
+\indent b. Represent the property "x is prime."\\
+\indent c. Goldbach's conjecture is the conjecture(unproven as yet)that every number is equal to the sum of two primes. Represent this conjecture as a logical sentence.}
+
+
+
+
+
+
+% \section{Speed Up}
+% [outline]\\
+% 1. Basic Model: node by node\\
+% 2. Speed up model: layer by layer
+%
+% \input{related-work.tex}
+%
+% \subsubsection*{References}
+\end{CJK*}
+\end{document}

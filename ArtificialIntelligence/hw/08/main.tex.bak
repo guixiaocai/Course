@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{CJK}
+\usepackage{amssymb} % For LaTeX2e
+% \usepackage{nips13submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{textcomp}  % \textcelsius
+% \graphicspath{{./fig/}}
+% \usepackage{tikz}
+
+\title{Homework 1}
+\author{Zhong Yun 2016K8009915009}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proof}{Proof}
+
+
+\begin{document}
+\begin{CJK*}{GBK}{song}
+\maketitle
+
+\boldmath{$7.17$}\quad A propositional 2-CNF expression is a conjunction of clauses, each containing exactly 2 literals, e.g.,
+    \[
+        (A \lor B) \land (\lnot A \lor C) \land (\lnot B \lor D) \land (\lnot C \lor G) \land (\lnot D \lor G).
+    \]
+
+    $\mathbf{a.}$ Prove using resolution that the above sentence entails $G$.
+
+    $\mathbf{b.}$ Two clauses are semantically distinct if they are not logically equivalent. How many semantically distinct 2-CNF clauses can be constructed from n proposition symbols?
+
+    $\mathbf{c.}$ Using your answer to (b), prove that propositional resolution always terminates in time polynomial in n given a 2-CNF sentence containing no more than n distinct symbols.
+
+    $\mathbf{d.}$ Explain why your argument in (c) does not apply to 3-CNF.
+
+\end{CJK*}
+\end{document}
+
+

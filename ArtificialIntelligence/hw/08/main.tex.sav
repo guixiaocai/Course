@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage{CJK}
+\usepackage{amssymb} % For LaTeX2e
+% \usepackage{nips13submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{textcomp}  % \textcelsius
+% \graphicspath{{./fig/}}
+% \usepackage{tikz}
+
+\title{Homework 1}
+\author{Zhong Yun 2016K8009915009}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+\newtheorem{theorem}{Theorem1}`\newtheorem{proof}{Proof}
+
+
+\begin{document}
+\begin{CJK*}{GBK}{song}
+\maketitle
+
+\begin{theorem}
+定理2.6.4
+\begin{itemize}
+  \item [(i)]  $A\rightarrow B, A \vdash B$
+  \item [(ii)]  $A\rightarrow B, B\rightarrow C \vdash A\rightarrow C$
+  \item [(iii)]  $A\rightarrow (B\rightarrow C), A\rightarrow B \vdash A\rightarrow C$
+\end{itemize}
+\end{theorem}
+
+
+\begin{proof}
+\section*{证明(i)}
+hou 
+\section*{证明(ii)}
+ii
+\end{proof}
+
+\begin{theorem}
+定理2.6.9
+\begin{itemize}
+  \item [(i)]  $A\vdash B, A B.$
+  \item [(ii)] $A\vee B \vdash \dashv B\vee A.(\vee 交换律)$ 
+  \item [(iii)] $(A\vee B)\vee C \vdash \dashv A\vee (B\vee C).(\vee 结合律)$
+  \item [(iv)] $A\vee B \vdash \dashv \neg A\rightarrow B$
+  \item [(v )] $A\rightarrow B\vdash \dashv \neg A\vee B$
+  \item [(vi)] $\neg(A\vee B)\vdash \dashv \neg A\wedge \neg B. (De Morgen律)$
+  \item [(vii)] $\neg(A\wedge B)\vdash \dashv \neg A\vee \neg B. (De Morgen律)$
+  \item [(viii)] $\O \vdash A\vee \neg A. (排中律)$
+\end{itemize}
+\end{theorem}
+
+
+\begin{proof}
+
+\end{proof}
+
+
+\end{CJK*}
+\end{document}

@@ -1,0 +1,44 @@
+\documentclass{article} % For LaTeX2e
+% \usepackage{nips13submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\title{Homework 6}
+\author{Zhong Yun 2016K8009915009}
+\date{\today}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\begin{document}
+\maketitle
+
+The results are as follows:
+
+  \begin{figure}
+      \centering
+      \caption{}\label{}
+      \includegraphics[width=16cm]{1.JPG}\\      
+  \end{figure}  
+
+  \begin{figure}
+      \centering
+      \caption{}\label{}
+      \includegraphics[width=16cm]{2.JPG}\\
+  \end{figure}
+  
+  \begin{figure}
+      \centering
+      \caption{}\label{}
+      \includegraphics[width=16cm]{3.JPG}\\
+  \end{figure}
+
+  \begin{figure}
+      \centering
+      \caption{}\label{}
+      \includegraphics[width=16cm]{4.JPG}\\
+  \end{figure}
+
+
+\end{document}
