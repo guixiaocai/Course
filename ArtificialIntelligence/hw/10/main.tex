@@ -1,0 +1,85 @@
+\documentclass{article} % For LaTeX2e
+% \usepackage{nips13submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{CJK}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{textcomp}  % \textcelsius
+% \graphicspath{{./fig/}}
+% \usepackage{tikz}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{setspace} %\linestretch{1.6}
+\renewcommand{\baselinestretch}{1.6}
+
+\title{Homework 10}
+\author{Zhong Yun 2016K8009915009}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=1.0cm,bottom=2.5cm}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proof}{Proof}
+
+\begin{document}
+\begin{CJK*}{GBK}{song}
+
+\maketitle
+%
+%\begin{abstract}
+%empty
+%\end{abstract}
+
+
+$\mathbf{1.}$ \textbf{给出一个集合，列出其所有元素}\\
+\indent \textbf{Solution} 代码见下图(Figure1)：\\
+\begin{figure}[htbp]
+\centering\includegraphics[width=3in]{member_def.PNG}
+\caption{member代码}\label{fig-1}
+\end{figure}\\
+\indent 以集合[1,2,3]为测试用例，结果如下图(Figure 2):
+\begin{figure}[htbp]
+\centering\includegraphics[width=2in]{member_res.PNG}
+\caption{member测试结果}\label{fig-2}
+\end{figure}
+
+
+$\mathbf{2.}$ \textbf{给出一个集合，列出其所有子集}\\
+\indent \textbf{Solution} 代码见下图(Figure3)：\\
+\begin{figure}[htbp]
+\centering\includegraphics[width=3.2in]{subset_def.PNG}
+\caption{subset代码}\label{fig-3}
+\end{figure}\\
+\indent 以集合[1,2,3]为测试用例，结果如下图(Figure 4):
+\begin{figure}[htbp]
+\centering\includegraphics[width=2in]{subset_res.PNG}
+\caption{subset测试结果}\label{fig-4}
+\end{figure}
+\\
+\newpage
+$\mathbf{3.}$ \textbf{判断grandfather(X,yuqing)是否为真？}\\
+\indent \textbf{Solution} 代码及测试结果见下图Figure5和Figure6, 由测试结果知，grandfather(X,yuqing)为真。\\
+\begin{figure}[htbp]
+\centering\includegraphics[width=4in]{3-def.PNG}
+\caption{题3代码(如题干)}\label{fig-5}
+\end{figure}
+\begin{figure}[htbp]
+\centering\includegraphics[width=2.5in]{3-res.PNG}
+\caption{题3测试结果}\label{fig-6}
+\end{figure}
+
+% \section{Speed Up}
+% [outline]\\
+% 1. Basic Model: node by node\\
+% 2. Speed up model: layer by layer
+%
+% \input{related-work.tex}
+%
+% \subsubsection*{References}
+\end{CJK*}
+\end{document}
