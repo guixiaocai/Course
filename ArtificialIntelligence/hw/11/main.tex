@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage{stmaryrd}
+\usepackage{amssymb} % For LaTeX2e
+% \usepackage{nips13submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{CJK}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{textcomp}  % \textcelsius
+% \graphicspath{{./fig/}}
+% \usepackage{tikz}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{setspace} %\linestretch{1.6}
+\renewcommand{\baselinestretch}{1.6}
+
+\title{Homework 11}
+\author{Zhong Yun 2016K8009915009}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=0.0cm,bottom=2.5cm}
+
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proof}{Proof}
+
+\begin{document}
+\begin{CJK*}{GBK}{song}
+
+\maketitle
+
+\textbf{1. Prove that if a heuristic is consistent, it must be admissible.}
+
+\noindent \textbf{Proof}
+\emph{if a heuristic is consistent, it must be admissible $\Leftrightarrow$ $\forall$ 结点n 和它的任意祖先$n_1$，有$h(n_1)\leqslant h(n)+c(n_1, a, n) \Rightarrow h(n)\leqslant h^*(n)$, 其中$h^*(n)$是从结点n 到目标的最优路径长度}
+
+\indent 假设heuristic为一致的情况下，如果存在结点$n$，使得$h(n)> h^*(n)$，则有
+$$g(n)+h(n) > g(n)+h^*(n) = g(Goal)$$
+$$\Rightarrow h(n) > g(Goal)-g(n) = c(n, a, Goal) = c(n, a, Goal)+h(Goal)$$
+$$\Rightarrow n is not admissible$$
+与假设矛盾.
+
+\indent 故不存在结点n，使得$h(n)>h^*(n)$。也就是说，对于任意节点n，有$h(n)<h^*(n)$.
+\indent 因此如果一个heuridtic为一致的，它必定是admissible的.
+\\\\
+
+\noindent \textbf{2. Give an example of heuristic, which is admissible but not consistent.}
+
+\textbf{Solution} 给定一个admissible的heuristic的例子为：$h(n)=\llfloor h^*(n)\rrfloor$.
+
+\indent 对于下图来说：
+
+\qquad \includegraphics[width=2.5in]{11_1.PNG}
+
+$h(n_0)=\llfloor h^*(n_0)\rrfloor=1.1\qquad
+c(n_0, a, n_1)+h(n_1)=c(n_0, a, n_1)+\llfloor h^*(n_1)\rrfloor=0.5$
+
+\indent 因此，该heuristic不满足一致性.
+\\\\
+
+\noindent \textbf{3.Judge whether the following result is true. Prove your argument.}
+
+	$$A* of graph search is optimal with admissible heuristic$$
+
+\indent \textbf{Solution} 以上结论是错误的, 证明如下.
+
+\textbf{Proof} 以\textbf{题2}中的heuristic：$h(n)=\llfloor h^*(n)\rrfloor$ 为例，来证明此结论错误.
+
+\indent 以下图为例：\\
+\indent \indent \includegraphics[width=3in]{11_2.PNG}
+
+\indent 其中，$h(n_0)=3, h(n_1)=1, h(n_2)=2, h(n_3)=1.$
+
+\indent 下面进行图搜索：第一次从$n_0$扩展到$n_1, n_2$,由于
+$$f(n_1)=0.5+1=1.5<f(n_2)=0.3+2=2.3$$
+\indent 因此从$n_1$扩展到$n_3$，因为
+$$f(n_2)=g(n_2)+h(n_2)=0.3+2=2.3>f(n_3)=g(n_3)+h(n_3)=0.7+1=1.7$$
+\indent 所以路径会先从$n_3$扩展到Goal. 当再次回到$n_2$时，会由于$n_3$已经被扩展过而不能被扩展，所以搜索的的结果将返回路径
+$n_0-n_1-n_3-Goal$，然而最佳路径为$n_0-n_2-n_3-Goal$.
+
+\indent 因此满足一致性的heuristic的图搜索不是最优的.
+
+
+
+
+\end{CJK*}
+\end{document}
+
+
+
+
+
+
+
+
