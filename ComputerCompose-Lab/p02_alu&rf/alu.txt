@@ -1,0 +1,116 @@
+`timescale 10 ns / 1 ns
+
+
+
+`define DATA_WIDTH 32
+
+
+
+module alu(
+
+	input [`DATA_WIDTH - 1:0] A,
+
+	input [`DATA_WIDTH - 1:0] B,
+
+	input [2:0] ALUop,
+
+	output Overflow,
+
+	output cout_addrryOut,
+
+	output Zero,
+
+	output [`DATA_WIDTH - 1:0] Result
+
+);
+
+	//定义线型变量，记录进行and,or,add,sub,slt操作后产生的结果
+	wire [`DATA_WIDTH-1:0] result_and;
+
+	wire [`DATA_WIDTH-1:0] result_or;
+
+	wire [`DATA_WIDTH-1:0] result_add;
+
+	wire [`DATA_WIDTH-1:0] result_sub;
+
+	wire [`DATA_WIDTH-1:0] result_slt;
+
+
+	//用于计算加和减时是否有进借位
+	wire [`DATA_WIDTH:0] add_temp;
+
+	wire [`DATA_WIDTH:0] sub_temp;
+
+	//记录加法和减法时的CarryOut值
+	wire [`DATA_WIDTH-1:0] cout_add;
+
+	wire [`DATA_WIDTH-1:0] cout_sub;
+
+	//用于计算加法的减法时的Overflow值
+	wire [`DATA_WIDTH-1:0] overflow_add;
+
+	wire [`DATA_WIDTH-1:0] overflow_sub;
+
+	//用于比较A和B的大小
+	wire [`DATA_WIDTH:0] slt;
+
+	
+	//计算and, or, add, 和sub操作的结果
+	assign result_and = A & B;
+
+	assign result_or = A | B;
+
+	assign result_add = A + B;
+
+	assign result_sub = A + ~(B+32'hffffffff);//减法用补码计算
+
+
+	//包含符号位，用于计算加和减时是否有进借位
+	assign add_temp = {0,result_add}+~({0,A}+33'h1ffffffff);//和减去加数；若溢出即产生进位，则结果的符号位为1，否则为0
+
+	assign sub_temp = {0,A}+~({0,result_sub}+33'h1ffffffff);//被减数减去减数；若溢出，即产生借位，则结果符号位为1，否则为0
+	
+
+	assign cout_add = add_temp[`DATA_WIDTH];//将上一步计算结果的符号位赋给cout_add
+
+	assign cout_sub = sub_temp[`DATA_WIDTH];//将上一步计算结果的符号位赋给cout_sub
+
+	//计算加法的减法时的Overflow值
+	assign overflow_add = ((A[`DATA_WIDTH-1]&B[`DATA_WIDTH-1]&(~result_add[`DATA_WIDTH-1]))|
+((~A[`DATA_WIDTH-1])&(~B[`DATA_WIDTH-1])&result_add[`DATA_WIDTH-1]));//两个正数的加法是一个负数，或两个负数的加法是正数的情况下，产生溢出
+
+	assign overflow_sub = (((~A[`DATA_WIDTH-1])&B[`DATA_WIDTH-1]&(result_sub[`DATA_WIDTH-1]))|
+(A[`DATA_WIDTH-1]&(~B[`DATA_WIDTH-1])&(~result_sub[`DATA_WIDTH-1])));//正数减负数为负数，或负数减正数为正数的情况下，产生溢出
+
+
+	//将上述结果赋给CarryOut和Overflow
+	assign CarryOut = (ALUop == 32'b010) ? cout_add : cout_sub;
+
+	assign Overflow = (ALUop == 32'b010) ? overflow_add : overflow_sub;
+
+
+	//将A和B扩展为33位，原来的最高位做扩展后的最高位，进行A-B操作，若A比B小，则最高位为1
+	assign slt = {A[`DATA_WIDTH-1],A} + ~({B[`DATA_WIDTH-1],B}+33'h1ffffffff);
+
+	//将上述结果赋给Result_slt
+	assign result_slt = slt[`DATA_WIDTH];
+
+
+	//将上述各种运算的结果赋给Result
+	assign Result = (result_and & {32{(~ALUop[0]&~ALUop[1]&~ALUop[2])}}) |
+
+			(result_or & {32{(ALUop[0]&~ALUop[1]&~ALUop[2])}}) |
+
+			(result_add & {32{(~ALUop[0]&ALUop[1]&~ALUop[2])}}) |
+
+			(result_sub & {32{(~ALUop[0]&ALUop[1]&ALUop[2])}}) |
+
+			(result_slt & {32{(ALUop[0]&ALUop[1]&ALUop[2])}});
+
+
+	//如果结果为0，Zero赋值为1
+	assign Zero = (Result == 32'b0)?32'b1:32'b0;
+
+
+
+endmodule

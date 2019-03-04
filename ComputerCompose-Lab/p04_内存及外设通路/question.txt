@@ -1,0 +1,3 @@
+readdata和instruction的always要用clk触发
+
+valid ack pc需在rst的时候赋初值

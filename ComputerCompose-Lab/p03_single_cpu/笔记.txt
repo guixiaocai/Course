@@ -1,0 +1,9 @@
+medium
+jal指令 往31号寄存器回写跳转前地址时，只把地址赋给了wdata，没有写赋给哪个寄存器（把31赋给waddr）
+
+addi,ori,addiu等，想当然地把符号扩展写成无符号的（ExtSel置0），实际上应扩展为有符号的（ExtSel置1），应该仔细阅读mips手册。
+ps：debug时应该找错的更离谱的波形，比较容易看出错误
+
+SB，SH操作要对齐
+
+srlv,sllv操作数A要取低五位

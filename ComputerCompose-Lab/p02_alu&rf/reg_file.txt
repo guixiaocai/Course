@@ -1,0 +1,40 @@
+`timescale 10 ns / 1 ns
+
+`define DATA_WIDTH 32
+`define ADDR_WIDTH 5
+
+module reg_file(
+	input clk,
+	input rst,
+	input [`ADDR_WIDTH - 1:0] waddr,
+	input [`ADDR_WIDTH - 1:0] raddr1,
+	input [`ADDR_WIDTH - 1:0] raddr2,
+	input wen,
+	input [`DATA_WIDTH - 1:0] wdata,
+	output [`DATA_WIDTH - 1:0] rdata1,
+	output [`DATA_WIDTH - 1:0] rdata2
+);
+
+
+	reg [`DATA_WIDTH - 1:0] reg_files [0:`DATA_WIDTH - 1];//定义32个32位寄存器组
+
+	//时钟逻辑实现同步写
+	always @(posedge clk or posedge rst)//
+	begin
+		if(rst)//读到复位信号，将0号寄存器置为0
+			begin
+				reg_files[0] <= 32'b0;
+			end
+		else
+		begin
+			if(wen && waddr != 5'b0)//对于0号寄存器以外的寄存器，当写使能为1时，读入数据
+				reg_files[waddr] <= wdata;
+		end
+	end
+
+	//组合逻辑实现异步读
+	assign rdata1 = reg_files[raddr1];//读口1读入数据
+	assign rdata2 = reg_files[raddr2];//读口2读入数据
+
+
+endmodule

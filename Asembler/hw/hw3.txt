@@ -1,0 +1,41 @@
+.section .data
+iostring:
+	.asciz "ab1g2hA0H56po9wK78nB"
+.section .text
+.globl _start
+_start:
+	mov		$iostring, %ebx
+	mov		%ebx, %edx
+	
+L1:
+	mov		(%ebx), %al
+	test	%al, %al
+	je		L3
+	cmp		$'a', %al
+	jb		L2
+	cmp		$'z', %al
+	ja		L2
+	sub		$'a', %al
+	add		$'A', %al
+	jmp		L2
+	
+L2:
+	mov		%al, (%edx)
+	inc		%ebx
+	inc		%edx
+	jmp		L1
+
+L3:
+	mov		%al, (%edx)
+
+#output
+	mov		$4, %eax
+	mov		$1, %ebx
+	mov		$iostring, %ecx
+	mov		$20, %edx
+	int		$0x80
+	
+#exit
+	movl	$1, %eax
+	movl	$0, %ebx
+	int		$0x80
