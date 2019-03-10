@@ -1,0 +1,271 @@
+var tapesize=100;
+var displaylength=20;
+var delay=0;
+var choice="1";
+var Tape0=0;
+var TapeR = new Array(tapesize);
+var TapeL = new Array(tapesize);
+
+for (i=0; i<tapesize; i++){TapeR[i]=0; TapeL[i]=0}
+
+var displayTapeL = new Array(displaylength);
+var displayTapeR = new Array(displaylength);
+
+var currentState = 0;
+var stopped = false;
+var inerror = false;
+var  tapePosition=0;
+var stepnumber=0;
+
+function stoperror(){
+ document.tm.statetable.value =  "out of memory"}
+
+function statetable_setalphabet(alphabetlist)
+{var n = alphabetlist.length;
+for (j=0; j <n; j++) this.alphabet[j]=alphabetlist[j]
+}
+
+function statetable_setstate(statelist)
+{var n = statelist.length;
+for (j=0; j< n; j++) this.statedata[j]=statelist[j]
+}
+
+function statetable_setmove(movelist)
+{var n = movelist.length;
+for (j=0; j< n; j++) this.movedata[j]=movelist[j]
+}
+
+
+function statetable_setwrite(writelist)
+{var n = writelist.length;
+for (j=0; j< n; j++) this.writedata[j]=writelist[j]
+}
+
+function statetable_getstateValue(i, j){return this.statedata[i*this.asize + j]}
+function statetable_getmoveValue(i, j){return this.movedata[i*this.asize + j]}
+function statetable_getwriteValue(i, j){return this.writedata[i*this.asize + j]}
+
+
+
+function writeStatetable()
+{document.tm.statetable.value =  "";
+for (i =0; i<this.snumber; i++)
+  { for (j=0; j<this.asize; j++)
+       {document.tm.statetable.value = document.tm.statetable.value + "  "  + i +  "      ";
+if (i<10){document.tm.statetable.value = document.tm.statetable.value + "  "}
+ document.tm.statetable.value = document.tm.statetable.value + this.alphabet[j] + "       " + this.alphabet[this.getwriteValue(i,j)] + "       " + this.getmoveValue(i,j) + "       " ;
+if (this.getstateValue(i,j)==-1){document.tm.statetable.value = document.tm.statetable.value + "stop" + "\n"}
+else {document.tm.statetable.value = document.tm.statetable.value + this.getstateValue(i,j) + "\n"}
+      }
+   }
+}
+
+
+function statetable(asize, snumber)
+{
+this.snumber= snumber;
+this.asize = asize;
+this.statedata = new Array(asize* snumber);
+this.movedata = new Array(asize* snumber);
+this.writedata = new Array(asize* snumber);
+
+this.alphabet = new Array(asize);
+
+this.setstate = statetable_setstate;
+this.setmove = statetable_setmove;
+this.setwrite = statetable_setwrite;
+this.setalphabet = statetable_setalphabet;
+
+this.getstateValue= statetable_getstateValue;
+this.getmoveValue= statetable_getmoveValue;
+this.getwriteValue= statetable_getwriteValue;
+
+this.write = writeStatetable;
+
+}
+
+
+function writeTape()
+{
+for (i=0;  i < displaylength; i++) {displayTapeL[i] = exampleTable.alphabet[TapeL[displaylength-1-i]]}
+for (i=0; i < displaylength; i++){displayTapeR[i] = exampleTable.alphabet[TapeR[i]]}
+ document.tm.tape.value = displayTapeL.join(" | ") + "  |||  " + exampleTable.alphabet[Tape0] + "  |||  " + displayTapeR.join(" | ");
+return;
+}
+
+function choosemachine()
+{ choice= document.tm.menu.value;
+document.tm.statetable.value = "You have chosen Machine " + choice}
+
+
+function loadmachine(){
+
+Tape0=0;
+for (i=0; i<100; i++){TapeR[i]=0; TapeL[i]=0}
+stopped=false;
+inerror=false;
+stepnumber=0;
+currentState = 0;
+tapePosition=0;
+
+
+if (choice == "1") {
+
+alphabetlist = new Array("_", "1");
+statelist = new Array(0,1,2,1,3,2,3,4,-1,4);
+movelist = new Array("R", "R", "R", "R", "L", "R", "L", "L", "R", "L");
+writelist= new Array(0, 1, 1, 1, 0,1,0 ,0,0, 1);
+
+Tape0=0;
+TapeR[0]=1;
+TapeR[1]=1;
+TapeR[3]=1;
+TapeR[4]=1;
+TapeR[5]=1;
+TapeR[6]=1;
+TapeR[7]=1;
+TapeR[8]=1;
+TapeR[9]=1;
+
+}
+
+
+else if (choice=="2" ) {
+
+alphabetlist = new Array("_", "1", "X");
+statelist = new Array(1, 0, 0, 2, 3, 1, -1, 2, 2, 4, 3, 3, 8 ,5 , 4 , 6 ,5, 5,9,7,6,4,7,7,1,8, 8, 10,9,9,11,10,10,-1,11,11);
+movelist = new Array("R", "R", "R", "L", "L", "R", "N", "L", "L", "L", "L", "L", "R", "R", "L", "R", "R", "R", 
+"L", "L", "R", "L", "L", "L", "R", "R", "R", "L", "L", "L", "R", "L", "L", "N", "R", "R");
+writelist= new Array(0,1,2,0,1,2,2,1,1,0,1,2,0,2,2,0,1,2,0,2,2,0,1,2,0,1,1,0,1,1,0,1,1,0,1,1);
+
+Tape0=0;
+TapeL[0]=1;
+TapeL[1]=1;
+TapeL[2]=1;
+
+TapeR[0]=1;
+TapeR[1]=1;
+TapeR[2]=1;
+TapeR[3]=1;
+TapeR[4]=1;
+TapeR[5]=1;
+
+}
+
+else if (choice=="3") {
+
+alphabetlist = new Array("_", "1", "X");
+statelist = new Array(1,1,1,2,2,2,3,3,3,4,3,3,
+5, 4, 4, 6, 7, 5, 18, 6, 6, 8, 7, 7, 12 ,9 , 8 , 10 ,9, 9,13,11,10,8,11,11,5,12, 12, 14,13,13,15,14,14,16,15,15, 17, 16, 16, 4, 17, 17, 20, 18, 18, 21, 19, 19, 20, 19,  22, 21, 18, 21, -1, 23, 22, 23, 23, -1);
+movelist = new Array("L", "L", "L", "L", "L", "L","R", "R", "R", "N","R","R",
+"R", "R", "R", "L", "L", "R", "L", "L", "L", "L", "L", "L", "R", "R", "L", "R", "R", "R", 
+"L", "L", "R", "L", "L", "L", "R", "R", "R", "L", "L", "L", "R", "L", "L", "L", "R", "R", "R","L" ,"N" ,"N", "R" ,"N", "R","L","L","L","R","R","N","R","R","N","L","N","L","L","N","N","N","N");
+writelist= new Array
+(0,0,0,1,1,1,1,1,1,0,1,2,
+0,1,2,
+0,1,2,
+2,1,1,
+0,1,2,
+0,2,2,
+0,1,2,
+0,2,2,
+0,1,2,
+0,1,1,
+0,1,1,
+0,1,1,
+0,1,1,
+ 1, 1, 2,
+ 0, 1, 2, 
+0,1,2,
+0,1,2,
+0,0,2,
+0,0,2,
+0,1,2,
+0,1,0);
+
+
+TapeR[0]=1;
+TapeR[1]=1;
+TapeR[2]=1;
+TapeR[3]=1;
+TapeR[4]=1;
+
+
+
+}
+
+
+else return;
+
+var statesnumber = statelist.length/alphabetlist.length;
+
+exampleTable = new statetable(alphabetlist.length, statesnumber);
+
+
+exampleTable.setalphabet(alphabetlist);
+exampleTable.setstate(statelist);
+exampleTable.setmove(movelist);
+exampleTable.setwrite(writelist);
+
+exampleTable.write();
+document.tm.currentstate.value = currentState;
+document.tm.tapepos.value =  tapePosition;
+document.tm.stepn.value =  stepnumber;
+
+
+writeTape();
+
+}
+
+function steppe(){
+if (stopped) return;
+
+var newState= exampleTable.getstateValue(currentState, Tape0);
+
+var newMove= exampleTable.getmoveValue(currentState, Tape0);
+var newWrite = exampleTable.getwriteValue(currentState, Tape0);
+
+stepnumber=stepnumber+1;
+Tape0=newWrite;
+
+
+ if (newMove=="L")
+   {tapePosition=tapePosition-1;
+	if (TapeR[tapesize-1]!=0){stoperror(); stopped=true; inerror=true; return;}
+    for (j=tapesize-1; j>0; j--){TapeR[j]=TapeR[j-1]}
+  TapeR[0]=Tape0;
+  Tape0=TapeL[0];
+    for (j=0; j<tapesize-1; j++){TapeL[j]=TapeL[j+1]}
+  TapeL[tapesize-1]=0
+    }
+    
+if (newMove=="R")
+ {tapePosition=tapePosition+1;
+if (TapeL[tapesize-1]!=0){stoperror(); stopped=true; inerror=true; return;}
+    for (j=tapesize-1; j>0; j--){TapeL[j]=TapeL[j-1]}
+  TapeL[0]=Tape0;
+  Tape0=TapeR[0];
+    for (j=0; j<tapesize-1; j++){TapeR[j]=TapeR[j+1]}
+  TapeR[tapesize-1]=0
+    }
+
+
+if (newState==-1){document.tm.currentstate.value ="Stopped"; writeTape(); stopped=true; return;}
+else currentState = newState;
+writeTape();
+document.tm.currentstate.value = currentState;
+document.tm.tapepos.value = tapePosition;
+document.tm.stepn.value = stepnumber;
+return;
+}
+
+function run() {
+while (!stopped) {steppe(); setTimeout("run()", delay); return;}
+ }
+
+
+function breakoff(){stopped=true; return;}
+
+function carryon(){if (!inerror) {stopped=false;} return;}
+
+

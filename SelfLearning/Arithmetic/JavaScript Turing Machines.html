@@ -1,0 +1,118 @@
+
+<!-- saved from url=(0050)https://www.turing.org.uk/book/update/tmjavar.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>JavaScript Turing Machines</title>
+<meta name="keywords" content="Alan Turing, Turing machine, mathematical logic, computable numbers, computability, Universal Turing Machine">
+         <meta name="description" content="Turing machines, formulated by Alan Turing in 1936 as the foundation of computability and modern computers.">
+
+<link rel="stylesheet" href="./JavaScript Turing Machines_files/updatestyle.css" type="text/css">
+<script src="./JavaScript Turing Machines_files/tmversion3r.js.&#19979;&#36733;"></script>
+</head>
+<body bgcolor="#FFFFFF" link="#800000" vlink="#401000" topmargin="40" leftmargin="40">
+<center>
+<table width="100%" cellpadding="8" cellspacing="8"><tbody><tr><td width="50" bgcolor="#d05000"><img width="50" height="1" src="./JavaScript Turing Machines_files/silly.gif"></td><td>
+<center>
+<table width="100%" cellpadding="8" cellspacing="8"><tbody><tr><td>
+<h1>Update to<br> <cite>Alan Turing: the Enigma</cite></h1>
+<h3>by <a href="http://www.synth.co.uk/">Andrew Hodges</a></h3>
+<h2>Turing machines implemented in JavaScript</h2>
+This page is part of the update material for <a href="https://www.turing.org.uk/book/update/part2.html">Chapter 2</a> of <cite>Alan Turing: The Enigma</cite>.
+</td>
+<td align="center"><a href="https://www.turing.org.uk/book/index.html"><img border="0" width="100" height="100" src="./JavaScript Turing Machines_files/bookicon.jpg"><br><cite>Alan Turing: the Enigma</cite></a><p>
+<a href="https://www.turing.org.uk/turing/index.html">Alan Turing Home Page</a> <br> <a href="https://www.turing.org.uk/sitemap.html">Site Map</a> | <a href="https://www.turing.org.uk/about.html">Contact and FAQ</a></p></td></tr></tbody></table>
+<br><hr><br>
+<table bgcolor="#c0c0c0" width="80%" cellpadding="8" cellspacing="8"><tbody><tr><td>
+Here you can see the basic ideas of Turing machines illustrated by some very simple examples. 
+<br><br>
+<form name="tm">
+<table width="80%" cellpadding="8" cellspacing="8"><tbody><tr>
+<td>CLICK on one of these: <br><select name="menu" size="3" onclick="choosemachine()">
+<option value="1">Machine 1: unary addition
+</option><option value="2"> Machine 2: divisibility
+</option><option value="3">Machine 3: primality
+</option></select>
+</td>
+
+<td>
+<input type="button" value=" load " onclick="loadmachine()">
+</td>
+<td>
+<input type="button" value=" step " onclick="steppe()">
+</td><td>
+<input type="button" value=" run " onclick="run()">
+</td>
+<td>
+<input type="button" value=" break " onclick="breakoff()">
+</td>
+<td>
+<input type="button" value=" continue " onclick="carryon()">
+</td>
+
+</tr></tbody></table>
+
+
+
+<table width="80%" cellpadding="8" cellspacing="8">
+<tbody><tr><td colspan="2">The tape will appear here. The scanned square, marked off with <font face="helvetica">|||....|||</font>, remains fixed while the tape passes through it. <br>
+ <input type="text" name="tape" size="100">
+</td></tr>
+
+<tr><td>
+<input name="currentstate" size="10"> Current state number
+<br>
+<input name="tapepos" size="10"> Current tape position
+<br>
+<input name="stepn" size="10"> Current step number
+</td>
+<td bgcolor="#ffffff" rowspan="2" valign="top" width="400"><h3>What to do:</h3>
+First choose your machine by CLICKing on the selection.
+<br>Then click on LOAD.
+<br>Now you can choose STEP to make the machine take one step at a time, or RUN to let the machine run until it terminates the calculation.
+<br>You can interrupt a RUN with BREAK. To resume, click on CONTINUE and then either STEP or RUN.
+<br>Reset by using LOAD.
+<h3>The machines:</h3>
+<b>Machine 1</b> is there to illustrate the basic operations. Step through the moves to see how it 'adds' two groups of 1's into a single group.
+<br><br>
+<b>Machine 2</b> performs a divisibility test: the machine will stop with an X printed in the original blank square separating the numbers if and only if the number on the left divides exactly into the number on the right. It is illustrated here for 3 and 6.
+ <br><br>
+<b>Machine 3</b> uses this divisibility test as the basis for a primality test: the machine stops with an X in the original square if and only if the number on the right is prime. It is illustrated here with the number 5 (this takes 489 steps).
+<p>
+© Andrew Hodges, 1 January 2003
+</p>
+</td>
+</tr>
+
+<tr>
+<td>The Turing machine table of behaviour<br> will appear below, set out in quintuples:<br><br><font face="helvetica">state | read | write | move | next-state</font><br><br>
+<textarea name="statetable" rows="20" cols="40"></textarea>
+</td></tr></tbody></table>
+<br><br>
+
+</form>
+A more extensive version of this simulator is available on <a href="http://rendell-attic.org/gol/TMapplet/index.htm">Paul Rendell's site.</a></td></tr></tbody></table>
+
+<br><hr><br>
+<center>
+<table width="430" height="72" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr align="center"><td bgcolor="#ffffff" width="86" height="28"><b>Quick Links:</b></td>
+<td width="86" height="28">
+<a href="http://www.turing.org.uk/book/index.html"><img width="86" height="28" border="0" alt="book" src="./JavaScript Turing Machines_files/book.gif"></a>
+</td><td width="86" height="28">
+<a href="http://www.turing.org.uk/publications/index.html"><img width="86" height="28" border="0" alt="publications" src="./JavaScript Turing Machines_files/publ.gif"></a>
+</td><td width="86" height="28">
+<a href="http://www.turing.org.uk/sources/index.html"><img width="86" height="28" border="0" alt="sources" src="./JavaScript Turing Machines_files/sources.gif"></a>
+</td><td width="86" height="28">
+<a href="https://www.turing.org.uk/scrapbook/index.html"><img width="86" height="28" border="0" alt="scrapbook" src="./JavaScript Turing Machines_files/scrap.gif"></a>
+</td></tr><tr align="center"><td width="86" height="44">
+<a href="https://www.turing.org.uk/index.html"><img width="86" height="44" border="0" alt="home" src="./JavaScript Turing Machines_files/home.gif"></a>
+</td>
+<td width="258" height="44" colspan="3" bgcolor="#a0a0a0"><form action="http://www.turing.org.uk/search/results.asp" method="post"><input type="text" maxlength="30" size="25" name="search"> <input type="Submit" value="Search"></form></td>
+<td width="86" height="44">
+<a href="http://www.synth.co.uk/"><img width="86" height="44" border="0" alt="Andrew Hodges" src="./JavaScript Turing Machines_files/synth.gif"></a>
+</td></tr></tbody></table>
+<br><hr><br>
+
+
+
+</center></center></td></tr></tbody></table></center></body></html>

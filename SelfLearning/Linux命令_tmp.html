@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Linux命令.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="linux-instructions">Linux Instructions</h1>
+<h3 id="ls">ls</h3>
+<ul>
+<li>以.开头的文件为隐藏文件，创建的隐藏文件不可见</li>
+<li>.代表当前目录，..代表上级目录</li>
+<li><code>-a</code>可显示隐藏文件</li>
+<li><code>-l</code>以列表形式显示详细信息，开头加d表示为目录</li>
+<li><code>-h</code>配合<code>-l</code>使用，更直观显示文件大小；<code>-l -h</code>可写为<code>-lh</code>，其他同理</li>
+<li>LS通配符
+<ul>
+<li><code>*</code>   表示任意个字符</li>
+<li><code>?</code>   表示任意一位字符</li>
+<li><code>[]</code>  表示可以匹配字符组中的任一个</li>
+<li><code>[abc]</code> 匹配a, b, c中的任一个。e.g. <code>ls [123]45.txt</code></li>
+<li><code>[a-f]</code> 匹配从a到f范围的任意一个。 e.g. <code>ls [1-3]23.txt</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="cd">cd</h3>
+<ul>
+<li><code>cd / cd ~</code>  切换到当前用户的主目录</li>
+<li><code>cd .</code>  保持当前目录</li>
+<li><code>cd ..</code>  回到上级目录</li>
+<li><code>cd -</code>   在最近两次工作目录间切换</li>
+</ul>
+<h3 id="touch">touch</h3>
+<ul>
+<li>如果文件不存在，创建文件；如果文件存在，可以修改文件的末次修改日期</li>
+<li>c</li>
+</ul>
+<h3 id="mkdir">mkdir</h3>
+<ul>
+<li>创建目录</li>
+<li><code>-p</code>  可递归创建目录。e.g. <code>mkdir a/b/c/d/e</code></li>
+<li>新建目录<strong>不能</strong>与目录中已有目录或文件<strong>重名</strong></li>
+</ul>
+<h3 id="rm">rm</h3>
+<ul>
+<li>永久删除文件或目录</li>
+<li><code>-f</code>  强制删除，忽略不存在的文件，无需提示</li>
+<li><code>-r</code>  递归删除目录下的内容，删除文件夹必须加此参数。e.g. <code>rm -r *</code>删除全部文件</li>
+</ul>
+<h3 id="tree">tree</h3>
+<ul>
+<li><code>tree [目录名]</code>以树状图列出文件目录结构</li>
+<li><code>-d</code>  只显示目录</li>
+</ul>
+<h3 id="cp">cp</h3>
+<ul>
+<li><code>cp [目录][源文件] [目录][目标文件]</code>复制文件或目录</li>
+<li><code>-f</code>  直接覆盖已存在的目标文件，不再提示</li>
+<li><code>-i</code>  覆盖文件前提示</li>
+<li><code>-r</code>  复制目录</li>
+</ul>
+<h3 id="mv">mv</h3>
+<ul>
+<li><code>mv 原文件 目标文件</code>  移动文件或目录/重命名</li>
+<li><code>-i</code>  覆盖文件前提示</li>
+<li>如果源文件/目录和目标文件/目录所在<strong>目录相同</strong>，则达到<strong>重命名</strong>的效果</li>
+</ul>
+<h3 id="cat">cat</h3>
+<ul>
+<li><code>cat 文件名</code>  查看文件内容、创建文件、文件合并、追加文件内容，适合查看<strong>内容较少</strong>的文件</li>
+<li><code>-b</code>  对非空行输出行号</li>
+<li><code>-n</code>  对所有行输出行号</li>
+</ul>
+<h3 id="more">more</h3>
+<ul>
+<li><code>more 文件名</code>  用于分屏显示文件内容，每次只显示<strong>一页内容</strong>，适用查看内容较多的文件</li>
+<li><code>空格键</code>  显示下一页</li>
+<li><code>Enter</code>   显示下一行</li>
+<li><code>b</code>   显示上一页一页</li>
+<li><code>f</code>   显示下一页</li>
+<li><code>q</code>   退出</li>
+<li><code>/word</code>   搜索word字符串</li>
+</ul>
+<h3 id="grep">grep</h3>
+<ul>
+<li><code>grep 搜索文本 文件名</code>  查找文件中的文本内容，允许<strong>模式查找</strong>；搜索文本中包含空行时加<strong>双引号</strong></li>
+<li><code>-n</code>  显示匹配行及行号</li>
+<li><code>-v</code>  显示不包含匹配文本的所有行</li>
+<li><code>-i</code>  忽略大小写</li>
+<li>模式查找
+<ul>
+<li><code>^a</code>    搜索以<code>a</code>开头的行 e.g. <code>grep ^fe -n 123.txt</code></li>
+<li><code>k$</code>    搜索以<code>k</code>结尾的行</li>
+</ul>
+</li>
+</ul>
+<h3 id="echo">echo</h3>
+<ul>
+<li>再终端中显示指定文字，通常与<strong>重定向</strong>一起使用</li>
+</ul>
+<h3 id="%E9%87%8D%E5%AE%9A%E5%90%91-%E5%92%8C">重定向 &gt;和&gt;&gt;</h3>
+<ul>
+<li>将命令执行结果重定向到一个文件，将本应显示在终端上的内容<strong>输出/追加</strong>到指定文件中</li>
+<li><code>&gt;</code>   表示输出，覆盖原有文件内容<br>
+e.g. <code>echo Hello World &gt; a</code>    <code>ls -lh &gt; 1.txt</code></li>
+<li><code>&gt;&gt;</code>  表示追加，将内容追加到已有文件结尾<br>
+e.g.<code>ls &gt;&gt; a</code>  <code>tree &gt;&gt; a</code></li>
+</ul>
+<h3 id="%E7%AE%A1%E9%81%93">管道 |</h3>
+<ul>
+<li>将一个命令的输出作为另一个命令的输入</li>
+<li>常用管道命令：<code>more, grep</code></li>
+<li>e.g. <code>ls -lh |more</code>  <code>ifconfig | grep inet</code></li>
+</ul>
+<h3 id="shutdown">shutdown</h3>
+<ul>
+<li><code>shutdown 选项 时间</code>  关机/重启</li>
+<li><code>-r</code> 重启</li>
+<li>e.g.<pre class="hljs"><code><div># 立即重启
+shutdown -r now
+
+# 在今天的20:25关机
+shutdown 20:25
+
+# 再过十分钟自动关机
+shutdown +10
+
+# 取消关机指令
+shutdown -c
+</div></code></pre>
+<blockquote>
+<p>不指定选项和参数，默认一分钟后关闭电脑</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="%E7%BD%91%E5%8D%A1%E5%92%8Cip%E5%9C%B0%E5%9D%80">网卡和IP地址</h3>
+<ul>
+<li>网卡是一个专门负责网络通讯的的硬件设备</li>
+<li>IP地址是设置在网卡上的地址信息
+<blockquote>
+<p>电脑-&gt;电话，网卡-&gt;SIM卡，IP地址-&gt;电话号码。</p>
+</blockquote>
+</li>
+<li>每台联网的电脑上都有IP地址，保证电脑间的通讯</li>
+<li>每台电脑的IP地址不能相同</li>
+</ul>
+<h3 id="ifconfig">ifconfig</h3>
+<ul>
+<li><code>ifconfig</code>    查看/配置网卡配置信息
+<blockquote>
+<p>一台计算机可能会有一个<strong>物理网卡</strong>和多个<strong>虚拟网卡</strong>，Linux中物理网卡通常以<code>ensXX</code>命名
+<code>127.0.0.1</code>称为<strong>本地环回/环回地址</strong>，以南用来测试本机网卡是否正常</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="ping">ping</h3>
+<ul>
+<li><code>ping IP地址</code>用于检测当前计算机到目标计算机之间的网络是否畅通；数值越大，速度越慢</li>
+</ul>
+<h3 id="ssh">ssh</h3>
+<ul>
+<li><code>ssh [-p port] user@remote</code>  关机/重启
+<blockquote>
+<p>remote:IP/域名/别名
+port 默认为22</p>
+</blockquote>
+</li>
+<li>只能在Linux或UNIX下使用</li>
+</ul>
+<h3 id="scp">scp</h3>
+<ul>
+<li><code>scp 用户名@IP:文件名或路径 用户名@IP:文件名或路径</code> 远程复制文件</li>
+<li><code>-P port</code>端口</li>
+<li><code>-r</code> 复制文件夹</li>
+<li>配置公钥 <code>ssh-keygen</code> 连续三次回车</li>
+<li>上传公钥到服务器 <code>ssh-copy-id -p port user@remote</code> 让远程服务器记住我们的公钥</li>
+<li>公钥文件:id_rsa.pub 私钥文件:id_rsa。<strong>本地</strong>使用<strong>私钥</strong>对数据加密/解密，<strong>服务器</strong>使用<strong>公钥</strong>对数据进行加密/解密</li>
+</ul>
+<blockquote>
+<p>非对称加密算法</p>
+<ul>
+<li><em>使用公钥加密的数据，需要使用私钥解密</em></li>
+<li><em>使用私钥加密的数据，需要使用公钥解密</em></li>
+</ul>
+</blockquote>
+<ul>
+<li>配置别名<br>
+e.g. 使用<code>ssh mac</code>来代替<code>ssh -p port user@remote</code>，需要在<code>~/.ssh/config</code>中追加以下内容：<pre class="hljs"><code><div>  Host mac
+      HostName ip地址
+      User XXXX
+      Port 22
+</div></code></pre>
+</li>
+</ul>
+<h2 id="%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4">用户权限相关命令</h2>
+<h3 id="read">read</h3>
+<ul>
+<li></li>
+</ul>
+
+</body>
+</html>

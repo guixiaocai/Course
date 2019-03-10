@@ -1,0 +1,27 @@
+
+body {font-family: palatino}
+
+a:hover {  text-decoration: underline}
+a {  text-decoration: none}
+
+.kksubtitle { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; font-weight: bold; color: #333333; text-decoration: none; }
+.kksubtitle a { text-decoration: none; color: #333333; }
+.kksubtitle a:hover { text-decoration: none; color: #333333; }
+.kkline { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; color: #333333; text-decoration: none; font-weight: normal; }
+.kkline a { text-decoration: none; color: #333333; }
+.kkline a:hover { text-decoration: underline; color: #333333; }
+
+a.l1:link {font-size : 9px; font-family : verdana; text-decoration : none; color: #000000;}
+a.l1:visited {font-size : 9px; font-family : verdana; text-decoration : none; color: #000000;}
+a.l1:hover {font-size : 9px; font-family : verdana; text-decoration : underline; color: #000000;}
+ 
+a.l2:link {font-size : 9px; font-family : verdana; text-decoration : none; color: #ffffff;}
+a.l2:visited {font-size : 9px; font-family : verdana; text-decoration : none; color: #ffffff;}
+a.l2:hover {font-size : 9px; font-family : verdana; text-decoration : underline; color: #ffffff;}
+ 
+.emagtd1  { font-size : 9px; font-family : verdana; background-color:#ffffff;}
+.emagtd2  { font-size : 9px; font-family : verdana; background-color:#003465; color: #ffffff;}
+a.lemag:link {font-size : 11px; font-family : verdana; text-decoration : underline; color: #364475;}
+a.lemag:visited {font-size : 11px; font-family : verdana; text-decoration : underline; color: #364475;}
+a.lemag:hover {font-size : 11px; font-family : verdana; text-decoration : underline; color: #364475;}
+.emagister1 {background-color:#ffffff;}
